@@ -27,7 +27,8 @@ class BlocProviders extends StatelessWidget {
           ),
       BlocProvider(create: (_) => getIt<ThemeCubit>()
           //  ThemeCubit(),
-          )
+          ),
+      BlocProvider(create: (_) => getIt<GuestsBloc>())
     ], child: const MyApp());
   }
 }

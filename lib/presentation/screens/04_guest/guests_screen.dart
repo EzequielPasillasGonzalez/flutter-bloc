@@ -1,5 +1,6 @@
+import 'package:blocs_app/presentation/screens/blocs/04-guests/guests_bloc.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GuestsScreen extends StatelessWidget {
   const GuestsScreen({super.key});
@@ -12,19 +13,20 @@ class GuestsScreen extends StatelessWidget {
       ),
       body: const _TodoView(),
       floatingActionButton: FloatingActionButton(
-        child: const Icon( Icons.add ),
+        child: const Icon(Icons.add),
         onPressed: () {},
       ),
     );
   }
 }
 
-
 class _TodoView extends StatelessWidget {
   const _TodoView();
 
   @override
   Widget build(BuildContext context) {
+    final guestsState = context.watch<GuestsBloc>().state;
+    final guestBloc = context.read<GuestsBloc>();
     return Column(
       children: [
         const ListTile(
@@ -33,27 +35,28 @@ class _TodoView extends StatelessWidget {
         ),
 
         SegmentedButton(
-          segments: const[
-            ButtonSegment(value: 'all', icon: Text('Todos')),
-            ButtonSegment(value: 'completed', icon: Text('Invitados')),
-            ButtonSegment(value: 'pending', icon: Text('No invitados')),
-          ], 
-          selected: const <String>{ 'all' },
-          onSelectionChanged: (value) {
-            
-          },
+          segments: const [
+            ButtonSegment(value: GuestFilter.all, icon: Text('Todos')),
+            ButtonSegment(value: GuestFilter.invited, icon: Text('Invitados')),
+            ButtonSegment(
+                value: GuestFilter.noInvited, icon: Text('No invitados')),
+          ],
+          selected: <GuestFilter>{guestsState.filter},
+          onSelectionChanged: (value) =>
+              guestBloc.setCustomFilterEvent(value.first),
         ),
-        const SizedBox( height: 5 ),
+        const SizedBox(height: 5),
 
         /// Listado de personas a invitar
         Expanded(
           child: ListView.builder(
+            itemCount: guestsState.howManyGuests,
             itemBuilder: (context, index) {
+              final guest = guestsState.filteredGuests[index];
               return SwitchListTile(
-                title: const Text('Juan carlos'),
-                value: true, 
-                onChanged: ( value ) {}
-              );
+                  title: Text(guest.description),
+                  value: guest.done,
+                  onChanged: (value) {});
             },
           ),
         )

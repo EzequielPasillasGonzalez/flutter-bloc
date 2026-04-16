@@ -10,4 +10,5 @@ void serviceLocatorInit() {
   getIt.registerSingleton(RouterSimplecubit());
   getIt.registerSingleton(ThemeCubit());
   getIt.registerSingleton(CounterCubit());
+  getIt.registerSingleton(GuestsBloc());
 }
