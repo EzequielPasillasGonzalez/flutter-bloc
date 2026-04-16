@@ -15,11 +15,11 @@ class CubitScreen extends StatelessWidget {
       ),
       body: Center(
           child:
-              // Con blocBuilder, solo este bloque de codigo esta pendiente del bloc
+              //**  Con blocBuilder, solo este bloque de codigo esta pendiente del bloc */
               BlocBuilder<UsernameCubit, String>(
         buildWhen: (previous, current) =>
             previous !=
-            current, // solo se construye cuando el estado anterior cambio
+            current, // * solo se construye cuando el estado anterior cambio
         builder: (context, state) {
           return Text(state);
         },
