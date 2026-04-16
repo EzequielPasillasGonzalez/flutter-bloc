@@ -15,6 +15,8 @@ class BlocProviders extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (_) => UsernameCubit(),
+        lazy:
+            false, // En cuanto se define el provider, llama la construccion del mismo inmediatamente y no espera a que lo llamen
       )
     ], child: const MyApp());
   }
