@@ -1,3 +1,4 @@
+import 'package:blocs_app/config/config.dart';
 import 'package:blocs_app/presentation/screens/blocs/04-guests/guests_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,9 @@ class GuestsScreen extends StatelessWidget {
       body: const _TodoView(),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => context
+            .read<GuestsBloc>()
+            .addGuestEvent(RandomGenerator.getRandomName()),
       ),
     );
   }

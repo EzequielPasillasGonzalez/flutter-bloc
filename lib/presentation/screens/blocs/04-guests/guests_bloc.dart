@@ -41,6 +41,7 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
     on<SetAllFilterEvent>(_setAllFilterEvent);
     on<SetNoInvitedFilterEvent>(_setNoInvitedFilterEvent);
     on<SetCustomFilterEvent>(_setCustomFilterEvent);
+    on<AddGuestEvent>(_addGuestEvent);
   }
 
   void setInvitedFilterEvent() => add(SetInvitedFilterEvent());
@@ -48,6 +49,8 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
   void setNoInvitedFilterEvent() => add(SetNoInvitedFilterEvent());
   void setCustomFilterEvent(GuestFilter event) =>
       add(SetCustomFilterEvent(event));
+
+  void addGuestEvent(String name) => add(AddGuestEvent(name: name));
 
   void _setInvitedFilterEvent(
           SetInvitedFilterEvent event, Emitter<GuestsState> emit) =>
@@ -63,4 +66,10 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
   void _setCustomFilterEvent(
           SetCustomFilterEvent event, Emitter<GuestsState> emit) =>
       emit(state.copyWith(filter: event.newFilter));
+
+  void _addGuestEvent(AddGuestEvent event, Emitter<GuestsState> emit) {
+    final newGuest =
+        Todo(id: uuid.v8(), description: event.name, completedAt: null);
+    emit(state.copyWith(guests: [...state.guests, newGuest]));
+  }
 }
