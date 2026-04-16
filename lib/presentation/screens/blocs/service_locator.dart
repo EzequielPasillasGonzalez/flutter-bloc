@@ -11,5 +11,10 @@ void serviceLocatorInit() {
   getIt.registerSingleton(ThemeCubit());
   getIt.registerSingleton(CounterCubit());
   getIt.registerSingleton(GuestsBloc());
-  getIt.registerSingleton(PokemonBloc());
+
+  // Se inyecta la dependencia al bloc
+  getIt.registerSingleton(
+      PokemonBloc(fetchPokemon: PokemonInformation.getPokemonName));
+
+  getIt.registerSingleton(GelocationCubit());
 }

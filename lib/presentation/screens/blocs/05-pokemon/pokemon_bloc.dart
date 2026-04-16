@@ -1,12 +1,16 @@
 import 'package:bloc/bloc.dart';
-import 'package:blocs_app/config/config.dart';
 import 'package:equatable/equatable.dart';
 
 part 'pokemon_event.dart';
 part 'pokemon_state.dart';
 
 class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
-  PokemonBloc() : super(const PokemonState()) {
+  final Future<String> Function(int) _fetchPokemonName;
+
+  // Se inyecta la dependencia del mundo externo
+  PokemonBloc({required Future<String> Function(int) fetchPokemon})
+      : _fetchPokemonName = fetchPokemon,
+        super(const PokemonState()) {
     on<PokemonAddedEvent>(_pokemonAddedEvent);
   }
 
@@ -16,7 +20,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     }
 
     try {
-      final pokemonName = await PokemonInformation.getPokemonName(id);
+      final pokemonName = await _fetchPokemonName(id);
 
       add(PokemonAddedEvent(id: id, name: pokemonName));
 

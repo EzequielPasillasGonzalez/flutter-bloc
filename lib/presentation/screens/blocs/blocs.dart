@@ -4,3 +4,4 @@ export '03-theme/theme_cubit.dart';
 export 'service_locator.dart';
 export '04-guests/guests_bloc.dart';
 export '05-pokemon/pokemon_bloc.dart';
+export '06-geolocation/gelocation_cubit.dart';

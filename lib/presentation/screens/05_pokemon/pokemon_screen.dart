@@ -18,7 +18,7 @@ class _PokemonScreenState extends State<PokemonScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('POkemonID: $pokemonId'),
+          title: Text('PokemonID: $pokemonId'),
         ),
         body: Center(
           child: FutureBuilder(
