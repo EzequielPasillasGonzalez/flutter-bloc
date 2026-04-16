@@ -22,3 +22,8 @@ final class AddGuestEvent extends GuestsEvent {
   const AddGuestEvent({required this.name});
   final String name;
 }
+
+final class ToggleGuestEvent extends GuestsEvent {
+  const ToggleGuestEvent({required this.id});
+  final String id;
+}
