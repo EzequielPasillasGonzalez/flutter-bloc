@@ -13,8 +13,10 @@ class GelocationState extends Equatable {
   @override
   List<Object?> get props => [location, serviceEnabled, permissionGranted];
 
-  GelocationState copyWith((double lat, double lng)? location,
-          bool? serviceEnabled, bool? permissionGranted) =>
+  GelocationState copyWith(
+          {(double lat, double lng)? location,
+          bool? serviceEnabled,
+          bool? permissionGranted}) =>
       GelocationState(
           location: location ?? this.location,
           permissionGranted: permissionGranted ?? this.permissionGranted,

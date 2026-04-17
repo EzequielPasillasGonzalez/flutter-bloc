@@ -30,7 +30,8 @@ class BlocProviders extends StatelessWidget {
           ),
       BlocProvider(create: (_) => getIt<GuestsBloc>()),
       BlocProvider(create: (_) => getIt<PokemonBloc>()),
-      BlocProvider(create: (_) => getIt<GelocationCubit>())
+      BlocProvider(create: (_) => getIt<GelocationCubit>()),
+      BlocProvider(create: (_) => getIt<HistoryLocationBloc>())
     ], child: const MyApp());
   }
 }

@@ -16,5 +16,13 @@ void serviceLocatorInit() {
   getIt.registerSingleton(
       PokemonBloc(fetchPokemon: PokemonInformation.getPokemonName));
 
-  getIt.registerSingleton(GelocationCubit());
+//* Diferentes manera de enviar la funcion necesaria
+  // final historyBloc = getIt.registerSingleton(HistoryLocationBloc());
+  getIt.registerSingleton(HistoryLocationBloc());
+
+// En cuanto se crea, empezamos a escuchar la ubicacion del usuario
+  getIt.registerSingleton(GelocationCubit(
+      // onNewUserLocationCallback: historyBloc.onNewUserLocation,
+      onNewUserLocationCallback: getIt<HistoryLocationBloc>().onNewUserLocation)
+    ..watchUserLocation());
 }
